@@ -29,7 +29,7 @@ server.get('/', (req, res) => {
 //
 //Route Handlers
 server.use('/api/projects', projectRoutes);
-//server.use('/api/resources', resourceRoutes);
+server.use('/api/resources', resourceRoutes);
 //server.use('/api/tasks', taskRoutes);
 
 //
