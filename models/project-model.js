@@ -1,6 +1,6 @@
 const knex = require('knex');
 const config = require('../knexfile');
-
+const utils = require('./utils');
 const db = knex(config);
 
 module.exports = {
@@ -10,8 +10,9 @@ module.exports = {
 
 //
 //Get Projects
-function getProjects() {
-    return db('projects');
+async function getProjects() {
+    let projects = db('projects');
+    return projects.map(project => utils.convertCompleted(project, 'complete'));
 }
 
 //
