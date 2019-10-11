@@ -6,10 +6,24 @@ router.get('/', async (req, res) => {
     res.status(200).json(projects);
 });
 
-router.post('/', validateProject, async (req, res) => {
+router.get('/:id', async (req, res, next) => {
+    let { id } = req.params;
+    try {
+        let project = await Projects.getProject(id);
+        res.status(200).json(project);
+    } catch (err) {
+        next(err);
+    }
+});
+
+router.post('/', validateProject, async (req, res, next) => {
     let project = req.body;
-    let newProject = await Projects.addProject(project);
-    res.status(200).json(newProject);
+    try {
+        let newProject = await Projects.addProject(project);
+        res.status(200).json(newProject);
+    } catch (err) {
+        next(err);
+    }
 });
 
 //

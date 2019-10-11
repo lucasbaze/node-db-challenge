@@ -5,6 +5,7 @@ const db = knex(config);
 
 module.exports = {
     getProjects,
+    getProject,
     addProject,
 };
 
@@ -13,6 +14,26 @@ module.exports = {
 async function getProjects() {
     let projects = db('projects');
     return projects.map(project => utils.convertCompleted(project, 'complete'));
+}
+
+//
+//Get Specific Project
+async function getProject(project_id) {
+    let project = await db('projects')
+        .where({ project_id })
+        .first();
+    let tasks = await db
+        .select('id', 'description', 'notes', 'complete')
+        .from('tasks')
+        .where({ project_id });
+
+    project = utils.convertCompleted(project, 'complete');
+    tasks = tasks.map(task => utils.convertCompleted(task, 'complete'));
+
+    return {
+        ...project,
+        tasks: [...tasks],
+    };
 }
 
 //
