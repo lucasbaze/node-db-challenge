@@ -26,12 +26,18 @@ async function getProject(project_id) {
         .select('id', 'description', 'notes', 'complete')
         .from('tasks')
         .where({ project_id });
+    let resources = await db
+        .select('r.resource_name', 'r.description')
+        .from('resources as r')
+        .join('project_resources as p_r', 'p_r.resource_id', 'r.resource_id')
+        .where({ 'p_r.project_id': project_id });
 
     project = utils.convertCompleted(project, 'complete');
     tasks = tasks.map(task => utils.convertCompleted(task, 'complete'));
 
     return {
         ...project,
+        resources: [...resources],
         tasks: [...tasks],
     };
 }
