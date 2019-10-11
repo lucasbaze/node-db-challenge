@@ -1,0 +1,12 @@
+{
+    "name": "node-db-challenge",
+    "version": "1.0.0",
+    "main": "index.js",
+    "repository": "https://github.com/lucasbaze/node-db-challenge.git",
+    "author": "Lucas Bazemore <lucasabazemore@gmail.com>",
+    "license": "MIT",
+    "scripts": {
+        "server": "nodemon index.js",
+        "start": "node index.js"
+    }
+}
