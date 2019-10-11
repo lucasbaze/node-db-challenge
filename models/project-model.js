@@ -9,3 +9,8 @@ module.exports = {
 
 //
 //Create New Project
+function addProject(project) {
+    return db('projects').insert({
+        ...project,
+    });
+}

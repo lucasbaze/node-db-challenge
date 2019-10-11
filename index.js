@@ -28,9 +28,9 @@ server.get('/', (req, res) => {
 
 //
 //Route Handlers
-server.use('/api/projects', recipeRoutes);
-server.use('/api/resources', resourceRoutes);
-server.use('/api/tasks', ingRoutes);
+server.use('/api/projects', projectRoutes);
+//server.use('/api/resources', resourceRoutes);
+//server.use('/api/tasks', taskRoutes);
 
 //
 //Error handler
@@ -41,4 +41,4 @@ server.use((err, req, res, next) => {
 //
 //Initialize PORT
 const PORT = process.env.PORT || 5000;
-server.listen(PORT, () => `App is listening on PORT: ${PORT}`);
+server.listen(PORT, () => console.log(`App is listening on PORT: ${PORT}`));
